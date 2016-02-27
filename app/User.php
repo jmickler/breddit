@@ -29,7 +29,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment');
     }
 
-    public function post()
+    public function posts()
     {
         return $this->hasMany('App\Post');
     }
@@ -41,6 +41,6 @@ class User extends Authenticatable
 
     public function subscribedSubbreddits()
     {
-        return $this->belongsToMany('App\Comment');
+        return $this->belongsToMany('App\Subbreddit')->withTimestamps();
     }
 }

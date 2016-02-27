@@ -18,6 +18,6 @@ class Subbreddit extends Model
 
     public function subscribedUsers()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User')->withTimestamps();
     }
 }

@@ -6,18 +6,35 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
+    /**
+    * Get the user that owns the comment.
+    */
+   public function user()
+   {
+       return $this->belongsTo('App\User');
+   }
 
-    public function post()
-    {
-        return $this->belongsTo('App\Post');
-    }
+    /**
+    * Get the post that owns the comment.
+    */
+   public function post()
+   {
+       return $this->belongsTo('App\Post');
+   }
 
-    public function parentComment()
-    {
-        return $this->belongsTo('App\Comment');
-    }
+    /**
+    * Get the parent comment that owns the comment.
+    */
+   public function parentComment()
+   {
+       return $this->belongsTo('App\Comment');
+   }
+
+    /**
+    * Get the child comments owned by the comment.
+    */
+   public function childComments()
+   {
+       return $this->hasMany('App\Comment');
+   }
 }

@@ -14,10 +14,11 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url');
+            $table->string('url')->nullable;
             $table->string('title');
+            $table->text('content');
             $table->integer('user_id')->unsigned();
-            $table->integer('subbreddit_id')->unsigned;
+            $table->integer('subbreddit_id')->unsigned();
             $table->timestamps();
         });
     }
