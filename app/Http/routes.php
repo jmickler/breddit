@@ -14,11 +14,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-if (env('APP_DEBUG')) {
-    // Route to view logs. Only for use in development
-    Route::get('logs', 
-        '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-}
 
 /*
 |--------------------------------------------------------------------------
