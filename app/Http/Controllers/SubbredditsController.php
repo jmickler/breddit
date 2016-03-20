@@ -1,8 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 class SubbredditsController extends Controller
 {
     /**
@@ -14,6 +18,7 @@ class SubbredditsController extends Controller
     {
         return \App\Subbreddit::all();
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -27,8 +32,10 @@ class SubbredditsController extends Controller
         $subbreddit->name = $request->name;
         $subbreddit->description = $request->description;
         $subbreddit->save();
+
         return $subbreddit;
     }
+
     /**
      * Display the specified resource.
      *
@@ -42,6 +49,7 @@ class SubbredditsController extends Controller
             'user'
         ])->find($id);
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -59,8 +67,10 @@ class SubbredditsController extends Controller
         } else {
             return response("Unauthorized", 403);
         }
+
         return $subbreddit;
     }
+
     /**
      * Remove the specified resource from storage.
      *

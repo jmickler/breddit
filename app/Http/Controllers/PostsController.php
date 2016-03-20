@@ -1,8 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 class PostsController extends Controller
 {
     /**
@@ -12,8 +16,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return \App\Post::all();
+        return \App\Post::with('subbreddit')->orderBy('id', 'desc')->get();
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -24,13 +29,16 @@ class PostsController extends Controller
     {
         $post = new \App\Post;
         $post->title = $request->title;
-        $post->content = $request->post_content;
+        $post->post_content = $request->post_content;
         $post->subbreddit_id = $request->subbreddit_id;
         $post->user_id = \Auth::user()->id;
         $post->url = $request->url;
+
         $post->save();
+
         return $post;
     }
+
     /**
      * Display the specified resource.
      *
@@ -41,6 +49,8 @@ class PostsController extends Controller
     {
         return \App\Post::find($id);
     }
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -53,14 +63,17 @@ class PostsController extends Controller
         $post = \App\Post::find($id);
         if ($post->user_id == \Auth::user()->id) {
             $post->title = $request->title;
-            $post->content = $request->post_content;
+            $post->post_content = $request->post_content;
             $post->url = $request->url;
+
             $post->save();
-        else {
+        } else {
             return response("Unauthorized", 403);
         }
+
         return $post;
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -72,7 +85,7 @@ class PostsController extends Controller
         $post = \App\Post::find($id);
         if ($post->user_id == \Auth::user()->id) {
             $post->delete();
-        else {
+        } else {
             return response("Unauthorized", 403);
         }
         return $post;
